@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+  web:
+    build: ./app
+    command: python gunicorn src.asgi:application -k uvicorn.workers.UvicornWorker
+    volumes:
+      - ./src/:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=asr
+      - POSTGRES_PASSWORD=asr
+      - POSTGRES_DB=test
+
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - ./storage/redis/data:/data
+    ports:
+      - 6379:6379
+    logging:
+    driver: none
+volumes:
+  postgres_data:

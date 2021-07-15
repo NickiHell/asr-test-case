@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 from apps.core.mixins import UUIDMixin, DateTimeMixin
 
@@ -8,7 +7,8 @@ class User(UUIDMixin, DateTimeMixin, models.Model):
     """Пользователь"""
     first_name = models.CharField('Имя', max_length=256)
     last_name = models.CharField('Фамилия', max_length=256)
-    timezone = models.DateTimeField('Тймзона', default=timezone.now())  # ???
+    timezone = models.DateTimeField('Тймзона')  # ???
+    email = models.EmailField()
     is_auth = models.BooleanField(default=False)
 
     class Meta:
