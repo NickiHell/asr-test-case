@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.core.mixins import UUIDMixin, DateTimeMixin
+from apps.core.mixins import DateTimeMixin, UUIDMixin
 from apps.user.models import User
 
 
@@ -11,7 +11,7 @@ class Notification(UUIDMixin, DateTimeMixin, models.Model):
     push_send = models.BooleanField('Push отправлен', default=False)
     payload = models.TextField()
 
-    class Meta:
+    class Meta(object):
         verbose_name = 'Уведомление'
         verbose_name_plural = 'Уведомления'
         indexes = (

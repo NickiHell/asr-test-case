@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.core.mixins import UUIDMixin, DateTimeMixin
+from apps.core.mixins import DateTimeMixin, UUIDMixin
 
 
 class User(UUIDMixin, DateTimeMixin, models.Model):
@@ -15,5 +15,5 @@ class User(UUIDMixin, DateTimeMixin, models.Model):
         verbose_name = 'Пользоатель'
         verbose_name_plural = 'Пользователи'
         indexes = [
-            models.Index(fields=['first_name', 'last_name'])
+            models.Index(fields=['first_name', 'last_name']),
         ]

@@ -3,7 +3,7 @@ from typing import Iterable
 from apps.user.models import User
 
 
-class EmailServiceUseCase:
+class EmailServiceUseCase(object):
     def __init__(self, text: str) -> None:
         self._text: str = text
 
