@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.core.mixins import DateTimeMixin, UUIDMixin
+from apps.core.utils.mixins import DateTimeMixin, UUIDMixin
 from apps.user.models import User
 
 

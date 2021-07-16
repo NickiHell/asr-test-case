@@ -15,6 +15,7 @@ psycopg2-binary = "*"
 pydantic = "^1.8.2"
 django-celery-beat = "*"
 django-celery-results = "*"
+django-dotenv = "^1.4.2"
 
 
 [tool.poetry.dev-dependencies]

@@ -1,29 +1,31 @@
 import os
 from pathlib import Path
-import djcelery
+
+import dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = '{{ secret_key }}'
+dotenv.read_dotenv(override=True)
 
-djcelery.setup_loader()
+SECRET_KEY = 'HDVmJlD2u49u6w6qe9kExyprcaIg8My0jOJNsdfewIaJGhfJrOVWlPCN2YkWxMpoBN4dB'
 
 ALLOWED_HOSTS = ['*']
 
-BASE_APPS = [
+BASE_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+)
 
-THIRD_PARTY_APPS = [
-    'djcelery',
-]
+LOCAL_APPS = (
+    'apps.notifications',
+    'apps.user',
+)
 
-INSTALLED_APPS = BASE_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = BASE_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -40,7 +42,9 @@ ROOT_URLCONF = 'src.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,7 +79,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Vladivostok'
 
