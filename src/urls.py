@@ -6,5 +6,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('notification/', include('apps.notifications.urls', namespace='notifications')),
+    path('notifications/', include('apps.notifications.urls', namespace='notifications')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

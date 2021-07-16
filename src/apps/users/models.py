@@ -8,7 +8,7 @@ class User(UUIDMixin, DateTimeMixin, AbstractUser):
     """Пользователь"""
     first_name = models.CharField('Имя', max_length=256)
     last_name = models.CharField('Фамилия', max_length=256)
-    timezone = models.DateTimeField('Тймзона')
+    timezone = models.DateTimeField('Время пользователя')
     email = models.EmailField()
 
     class Meta:

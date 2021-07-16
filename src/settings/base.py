@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 
-SECRET_KEY = 'HDVmJlD2u49u6w6qe9kExyprcaIg8My0jOJNsdfewIaJGhfJrOVWlPCN2YkWxMpoBN4dB'
+SECRET_KEY = env.str('SECRET_KEY', 'so_secret')
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,7 +38,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'src.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {

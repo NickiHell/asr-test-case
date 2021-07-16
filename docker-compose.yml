@@ -18,7 +18,7 @@ services:
 
     app:
       build: .
-      command: sh -c "wait-for postgres:5432 && python manage.py collectstatic --no-input && python manage.py migrate && src.asgi:application -k uvicorn.workers.UvicornWorker"
+      command: sh -c "wait-for postgres:5432 && python manage.py collectstatic --no-input && python manage.py migrate && asgi:application -k uvicorn.workers.UvicornWorker"
       container_name: app
       depends_on:
         - postgres

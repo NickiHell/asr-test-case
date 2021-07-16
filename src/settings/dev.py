@@ -1,5 +1,5 @@
 from .base import *
 
-DEBUG = IS_TEST_PS = True
+DEBUG = True
 
-DATABASES['default'] = env.db('DATABASE_URL', default='pgsql://postgres:@localhost:5432/test')
+# DATABASES['default'] = env.db('DATABASE_URL', default='pgsql://postgres:@localhost:5432/test')

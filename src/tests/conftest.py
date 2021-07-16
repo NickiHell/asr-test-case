@@ -6,6 +6,7 @@ from django.test import RequestFactory
 
 import pytest
 
+
 if TYPE_CHECKING:
     from apps.users.models import User
 
