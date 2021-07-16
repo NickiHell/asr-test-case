@@ -5,7 +5,7 @@
     <title>Send Notification</title>
 </head>
 <body>
-<form action="/notification/" method="post">
+<form action="/notifications/" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Отправить всем пользователям">

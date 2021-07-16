@@ -6,7 +6,8 @@ from apps.users.models import User
 
 class Notification(UUIDMixin, DateTimeMixin, models.Model):
     """Уведомления для пользователей"""
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications', verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications', verbose_name='Пользователь',
+                             null=True, blank=True)
     email_send = models.BooleanField('Email отправлен', default=False)
     push_send = models.BooleanField('Push отправлен', default=False)
     payload = models.TextField()

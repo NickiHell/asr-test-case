@@ -37,7 +37,6 @@ services:
       depends_on:
         - app
         - postgres
-        - rabbitmq
       deploy:
         replicas: 2
         restart_policy:
@@ -50,19 +49,6 @@ services:
             cpus: '0.25'
             memory: 20M
       hostname: celery_worker
-      image: app-image
-      networks:
-        - main
-      restart: on-failure
-
-    celery_beat:
-      command: sh -c "wait-for rabbitmq:5672 && wait-for app:8000 -- celery -A mysite beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
-      container_name: celery_beat
-      depends_on:
-        - app
-        - postgres
-        - rabbitmq
-      hostname: celery_beat
       image: app-image
       networks:
         - main

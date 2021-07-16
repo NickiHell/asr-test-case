@@ -6,10 +6,8 @@ from apps.core.mixins import DateTimeMixin, UUIDMixin
 
 class User(UUIDMixin, DateTimeMixin, AbstractUser):
     """Пользователь"""
-    first_name = models.CharField('Имя', max_length=256)
-    last_name = models.CharField('Фамилия', max_length=256)
-    timezone = models.DateTimeField('Время пользователя')
-    email = models.EmailField()
+    usertime = models.DateTimeField('Время пользователя', null=True, blank=True)
+    email = models.EmailField('Эмейл', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Пользоатель'
