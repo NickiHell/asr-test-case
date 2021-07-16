@@ -1,6 +1,6 @@
 import uuid
 
-from apps.core.taskapp.celery import app
+from apps.core.celery import app
 
 
 @app.task

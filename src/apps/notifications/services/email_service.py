@@ -1,6 +1,6 @@
 from typing import Iterable
 
-from apps.user.models import User
+from apps.user.models import Users
 
 
 class EmailServiceUseCase(object):
@@ -13,7 +13,7 @@ class EmailServiceUseCase(object):
 
     @staticmethod
     def _get_all_users_emails() -> Iterable:
-        emails: Iterable = User.objects.values_list('email')
+        emails: Iterable = Users.objects.values_list('email')
         return emails
 
     @staticmethod

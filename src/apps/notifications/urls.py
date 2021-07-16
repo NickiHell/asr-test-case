@@ -1,11 +1,9 @@
 from django.urls import path
 
-from apps.notifications.views import NotififcationSendView
-
+from apps.notifications.views import NotificationSendView
 
 app_name = 'notifications'
 
 urlpatterns = [
-    path('', NotififcationSendView.as_view(), name='send_notification'),
+    path('', NotificationSendView.as_view(), name='send_notification'),
 ]
-

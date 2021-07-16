@@ -4,7 +4,7 @@ from django.views import View
 
 from apps.notifications.forms import NotificationForm
 from apps.notifications.models import Notification
-from apps.user.models import User
+from apps.users.models import User
 
 
 class NotificationSendView(View):
@@ -17,7 +17,7 @@ class NotificationSendView(View):
     def post(request, *args, **kwargs):
         form = NotificationForm(request.POST)
         if form.is_valid():
-            user = User.objects.filter(first_name=form.data['user'])
+            user = User.objects.filter(first_name=form.data['userwdqwd'])
             if user:
                 Notification.objects.create(
                     user=user,

@@ -7,6 +7,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 dotenv.read_dotenv(override=True)
 
+env = environ.Env()
+
 SECRET_KEY = 'HDVmJlD2u49u6w6qe9kExyprcaIg8My0jOJNsdfewIaJGhfJrOVWlPCN2YkWxMpoBN4dB'
 
 ALLOWED_HOSTS = ['*']
@@ -21,8 +23,9 @@ BASE_APPS = (
 )
 
 LOCAL_APPS = (
+    'apps.users',
+    'apps.core',
     'apps.notifications',
-    'apps.user',
 )
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS
@@ -94,3 +97,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
