@@ -1,0 +1,68 @@
+[tool.poetry]
+name = "asr-test-case"
+version = "0.1.0"
+description = ""
+authors = ["NickiHell <nickihell@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django-dotenv = "^1.4.2"
+django-environ = "^0.4.5"
+django-celery-results = "^2.2.0"
+django-celery-beat = "^2.2.1"
+pydantic = "^1.8.2"
+psycopg2-binary = "^2.9.1"
+Faker = "^8.10.1"
+celery = "^5.1.2"
+gunicorn = "^20.1.0"
+uvicorn = "^0.14.0"
+Django = "^3.2.5"
+
+[tool.poetry.dev-dependencies]
+django-dotenv = "^1.4.2"
+flake8 = "^3.9.2"
+ipython = "^7.25.0"
+nplusone = "^1.0.0"
+pylint = "^2.9.3"
+pytest-django = "^4.4.0"
+pytest = "^6.2.4"
+taskipy = "^1.8.1"
+flakehell = "^0.9.0"
+wemake-python-styleguide = "^0.15.3"
+flake8-functions = "^0.0.6"
+isort = "^5.9.2"
+mypy = "^0.910"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+isort = "isort src"
+isort-lint = "isort --check-only src"
+flakehell-lint = "flakehell lint --jobs 8"
+
+
+[tool.flakehell]
+#baseline = ".flakehell_baseline"
+extended_default_ignore = [] # https://github.com/flakehell/flakehell/issues/10
+format = "grouped"
+max_complexity = 10
+max_function_length = 24
+max_line_length = 120
+show_source = true
+statistics = true
+
+[tool.flakehell.plugins]
+flake8 = ["+*"]
+flake8-functions = ["+*"]
+flake8-eradicate = ["+*"]
+flake8-bugbear = ["+*"]
+flake8-comprehensions = ["+*"]
+flake8-commas = ["+*"]
+flake8-quotes = ["+*"]
+mccabe = ["+*"]
+pep8-naming = ["+*"]
+pycodestyle = ["+*", "-E501"]
+wemake-python-styleguide = ["+*", "-WPS305"]
+
