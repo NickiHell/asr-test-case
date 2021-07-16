@@ -2,6 +2,7 @@ from django.urls import path
 
 from apps.notifications.views import NotificationSendView
 
+
 app_name = 'notifications'
 
 urlpatterns = [

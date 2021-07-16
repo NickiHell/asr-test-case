@@ -17,7 +17,7 @@ class NotificationSendView(View):
     def post(request, *args, **kwargs):
         form = NotificationForm(request.POST)
         if form.is_valid():
-            user = User.objects.filter(first_name=form.data['userwdqwd'])
+            user = User.objects.filter(first_name=form.data['user'])
             if user:
                 Notification.objects.create(
                     user=user,

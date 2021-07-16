@@ -1,40 +1,34 @@
 [tool.poetry]
-name = "djangoproject"
+name = "asr-test-case"
 version = "0.1.0"
 description = ""
 authors = ["NickiHell <nickihell@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Django = "^3.2.5"
-uvicorn = "^0.14.0"
-gunicorn = "^20.1.0"
-celery = "^5.1.2"
-Faker = "^8.10.1"
-psycopg2-binary = "*"
-pydantic = "^1.8.2"
-django-celery-beat = "*"
-django-celery-results = "*"
 django-dotenv = "^1.4.2"
-
+django-environ = "^0.4.5"
+django-celery-results = "^2.2.0"
+django-celery-beat = "^2.2.1"
+pydantic = "^1.8.2"
+psycopg2-binary = "^2.9.1"
+Faker = "^8.10.1"
+celery = "^5.1.2"
+gunicorn = "^20.1.0"
+uvicorn = "^0.14.0"
+Django = "^3.2.5"
 
 [tool.poetry.dev-dependencies]
-coverage = "*"
-django-coverage-plugin = "*"
-django-debug-toolbar = "*"
-django-dotenv = "*"
-django-extensions = "*"
-django-querycount = "*"
-factory-boy = "*"
-flake8 = "*"
-ipython = "*"
-nplusone = "*"
-pylint = "*"
-pytest-django = "*"
-pytest = "*"
-taskipy = "*"
+django-dotenv = "^1.4.2"
+flake8 = "^3.9.2"
+ipython = "^7.25.0"
+nplusone = "^1.0.0"
+pylint = "^2.9.3"
+pytest-django = "^4.4.0"
+pytest = "^6.2.4"
+taskipy = "^1.8.1"
 flakehell = "^0.9.0"
-wemake-python-styleguide = "^0.15.2"
+wemake-python-styleguide = "^0.15.3"
 flake8-functions = "^0.0.6"
 isort = "^5.9.2"
 mypy = "^0.910"
@@ -71,3 +65,4 @@ mccabe = ["+*"]
 pep8-naming = ["+*"]
 pycodestyle = ["+*", "-E501"]
 wemake-python-styleguide = ["+*", "-WPS305"]
+
