@@ -1,61 +1,72 @@
-version: '3.7'
+---
+
+# Default compose file for development and production.
+# Should be used directly in development.
+# Automatically loads `docker-compose.override.yml` if it exists.
+# No extra steps required.
+# Should be used together with `docker/docker-compose.prod.yml`
+# in production.
+
+version: "3.6"
 services:
-  postgres:
-    container_name: postgres
-    hostname: postgres
-    image: postgres:latest
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-    networks:
-      - main
-    ports:
-      - "5432:5432"
-    restart: on-failure
+  db:
+    image: "postgres:latest"
+    restart: unless-stopped
     volumes:
-      - postgresql-data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - webnet
+    env_file: ./config/.env
 
-    app:
-      build: .
-      command: sh -c "wait-for postgres:5432 && python manage.py collectstatic --no-input && python manage.py migrate && asgi:application -k uvicorn.workers.UvicornWorker"
-      container_name: app
+  web:
+    <<: &web
+      # Image name is changed in production:
+      image: "asr-test-case:dev"
+      build:
+        target: development_build
+        context: .
+        dockerfile: ./docker/django/Dockerfile
+        args:
+          DJANGO_ENV: development
+        cache_from:
+          - "asr-test-case:dev"
+          - "asr-test-case:latest"
+          - "*"
+
+      volumes:
+        - django-media:/var/www/django/media
       depends_on:
-        - postgres
-        - rabbitmq
-      expose:
-        - "8000"
-      hostname: app
-      image: app-image
+        - db
       networks:
-        - main
-      restart: on-failure
+        - webnet
+      env_file: ./config/.env
+      environment:
+        DJANGO_DATABASE_HOST: db
 
-    celery_worker:
-      command: sh -c "wait-for rabbitmq:5672 && wait-for app:8000 -- celery -A mysite worker -l info"
-      container_name: celery_worker
-      depends_on:
-        - app
-        - postgres
-      deploy:
-        replicas: 2
-        restart_policy:
-          condition: on-failure
-        resources:
-          limits:
-            cpus: '0.50'
-            memory: 50M
-          reservations:
-            cpus: '0.25'
-            memory: 20M
-      hostname: celery_worker
-      image: app-image
-      networks:
-        - main
-      restart: on-failure
+    command: python -Wd manage.py runserver 0.0.0.0:8000
+    healthcheck:
+      # We use `$$` here because:
+      # one `$` goes to shell,
+      # one `$` goes to `docker-compose.yml` escaping
+      test: |
+        /usr/bin/test $$(
+          /usr/bin/curl --fail http://localhost:8000/health/?format=json
+          --write-out "%{http_code}" --silent --output /dev/null
+        ) -eq 200
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
-  networks:
-    main:
+# This task is an example of how to extend existing ones:
+#   some_worker:
+#     <<: *web
+#     command: python manage.py worker_process
 
-  volumes:
-    postgresql-data:
+networks:
+  # Network for your internals, use it by default:
+  webnet:
+
+volumes:
+  pgdata:
+  django-static:
