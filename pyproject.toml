@@ -1,68 +1,81 @@
-[tool.poetry]
-name = "asr-test-case"
-version = "0.1.0"
-description = ""
-authors = ["NickiHell <nickihell@gmail.com>"]
-
-[tool.poetry.dependencies]
-python = "^3.9"
-django-dotenv = "^1.4.2"
-django-environ = "^0.4.5"
-django-celery-results = "^2.2.0"
-django-celery-beat = "^2.2.1"
-pydantic = "^1.8.2"
-psycopg2-binary = "^2.9.1"
-Faker = "^8.10.1"
-celery = "^5.1.2"
-gunicorn = "^20.1.0"
-uvicorn = "^0.14.0"
-Django = "^3.2.5"
-
-[tool.poetry.dev-dependencies]
-django-dotenv = "^1.4.2"
-flake8 = "^3.9.2"
-ipython = "^7.25.0"
-nplusone = "^1.0.0"
-pylint = "^2.9.3"
-pytest-django = "^4.4.0"
-pytest = "^6.2.4"
-taskipy = "^1.8.1"
-flakehell = "^0.9.0"
-wemake-python-styleguide = "^0.15.3"
-flake8-functions = "^0.0.6"
-isort = "^5.9.2"
-mypy = "^0.910"
-
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.taskipy.tasks]
-isort = "isort src"
-isort-lint = "isort --check-only src"
-flakehell-lint = "flakehell lint --jobs 8"
+
+[tool.nitpick]
+style = "https://raw.githubusercontent.com/wemake-services/wemake-python-styleguide/master/styles/nitpick-style-wemake.toml"
 
 
-[tool.flakehell]
-#baseline = ".flakehell_baseline"
-extended_default_ignore = [] # https://github.com/flakehell/flakehell/issues/10
-format = "grouped"
-max_complexity = 10
-max_function_length = 24
-max_line_length = 120
-show_source = true
-statistics = true
+[tool.poetry]
+name = "asr-test-case"
+description = "ASR Test Case"
+version = "0.1.0"
+readme = "README.md"
+authors = ["NickiHell"]
 
-[tool.flakehell.plugins]
-flake8 = ["+*"]
-flake8-functions = ["+*"]
-flake8-eradicate = ["+*"]
-flake8-bugbear = ["+*"]
-flake8-comprehensions = ["+*"]
-flake8-commas = ["+*"]
-flake8-quotes = ["+*"]
-mccabe = ["+*"]
-pep8-naming = ["+*"]
-pycodestyle = ["+*", "-E501"]
-wemake-python-styleguide = ["+*", "-WPS305"]
 
+[tool.poetry.dependencies]
+python = "^3.9"
+
+django-split-settings = "^1.0"
+django-axes = "^5.20"
+django-csp = "^3.7"
+django-health-check = "^3.16"
+django-http-referrer-policy = "^1.1"
+django-permissions-policy = "^4.1"
+django-stubs-ext = "^0.2"
+
+gunicorn = "^20.0"
+python-decouple = "^3.4"
+bcrypt = "^3.2"
+structlog = "^21.1"
+Django = "^3.2.5"
+psycopg2 = "^2.9.1"
+uvicorn = "^0.14.0"
+celery = "^5.1.2"
+django-celery-beat = "^2.2.1"
+Faker = "^8.10.1"
+django-celery-results = "^2.2.0"
+redis = "^3.5.3"
+
+
+[tool.poetry.dev-dependencies]
+django-debug-toolbar = "^3.2"
+django-querycount = "^0.7"
+django-migration-linter = "^3.0"
+django-extra-checks = "^0.11"
+django-coverage-plugin = "^2.0"
+nplusone = "^1.0"
+
+wemake-python-styleguide = "^0.15"
+flake8-pytest-style = "^1.5"
+flake8-django = "^1.1"
+flake8-logging-format = "^0.6"
+nitpick = "^0.26"
+
+pytest = "^6.2"
+pytest-django = "^4.4"
+pytest-cov = "^2.12"
+pytest-randomly = "^3.8"
+pytest-deadfixtures = "^2.2"
+pytest-testmon = "^1.1"
+pytest-timeout = "^1.4"
+django-test-migrations = "^1.1"
+hypothesis = "^6.14"
+
+mypy = "^0.910"
+django-stubs = "^1.8"
+
+sphinx = "^4.1"
+sphinx-autodoc-typehints = "^1.12"
+tomlkit = "^0.7"
+doc8 = "^0.8"
+
+yamllint = "^1.26"
+safety = "^1.10"
+dotenv-linter = "^0.2"
+polint = "^0.4"
+dennis = "^0.9"
+dump-env = "^1.3"
+ipython = "^7.25"
