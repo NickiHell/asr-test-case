@@ -44,6 +44,7 @@ class BaseNotificationUseCase(AbstractNotificationUseCase):
     def execute(self):
         self.UsersForPush, self.UsersForEmail = self._get_querysets()
         self.invoke_service(self.PushService, self.UsersForPush)
+        self.invoke_service(self.EmailService, self.UsersForPush)
         self.invoke_service(self.EmailService, self.UsersForEmail)
 
     def invoke_service(self, service: AbstractNotificationService, data: QuerySet[User]):

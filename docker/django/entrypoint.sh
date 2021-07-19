@@ -21,4 +21,8 @@ done
 
 # Evaluating passed command (do not touch):
 # shellcheck disable=SC2086
+cd /code
+
+python manage.py migrate --noinput
+python manage.py collectstatic --noinput
 exec $cmd

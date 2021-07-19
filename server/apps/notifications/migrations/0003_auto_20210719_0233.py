@@ -15,10 +15,6 @@ def create_periodic_tasks_forward(apps, _):
         task='server.apps.notifications.tasks.send_notifications',
     )
 
-    schedule, _ = IntervalSchedule.objects.get_or_create(
-        every=5,
-        period=IntervalSchedule.MINUTES)
-
     PeriodicTask.objects.create(
         interval=schedule,
         name='Clear Notifications',

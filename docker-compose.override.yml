@@ -12,9 +12,85 @@
 version: "3.6"
 services:
   web:
+    image: "asr-test-case:dev"
+    build:
+      target: development_build
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+      args:
+        DJANGO_ENV: development
+      cache_from:
+        - "asr-test-case:dev"
+        - "asr-test-case:latest"
+        - "*"
     ports:
       # We only bind ports directly in development:
       - "8000:8000"
     volumes:
-      # We only mount source code in development:
-      - .:/code
+      - django-media:/var/www/django/media
+    command: bash gunicorn.sh
+
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+    networks:
+      - webnet
+
+
+  celery:
+    image: "asr-test-case:dev"
+    build:
+      target: development_build
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+      args:
+        DJANGO_ENV: development
+      cache_from:
+        - "asr-test-case:dev"
+        - "asr-test-case:latest"
+        - "*"
+    command: celery -A server.apps.core.celery worker -l info
+    env_file: ./config/.env
+    depends_on:
+      - web
+      - redis
+    environment:
+      DJANGO_DATABASE_HOST: db
+    networks:
+      - webnet
+
+
+  celery-beat:
+    image: "asr-test-case:dev"
+    build:
+      target: development_build
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+      args:
+        DJANGO_ENV: development
+      cache_from:
+        - "asr-test-case:dev"
+        - "asr-test-case:latest"
+        - "*"
+    command: celery -A server.apps.core.celery beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    env_file: ./config/.env
+    depends_on:
+      - web
+      - redis
+    environment:
+      DJANGO_DATABASE_HOST: db
+    networks:
+      - webnet
+
+volumes:
+  django-media:
+  redis_data:
+
+
+networks:
+  webnet:
