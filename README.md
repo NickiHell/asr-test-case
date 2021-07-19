@@ -6,8 +6,13 @@ ASR Test Case
 [![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
 
 username: admin
+
 password: admin
 
- docker-compose up -d --no-deps --build
+cp ./config/.env.template ./config/.env
+
+cp ./server/settings/environments/local.py.template ./server/settings/environments/local.py
+
+docker-compose up -d --no-deps --build
 
 http://localhost:8000/admin
