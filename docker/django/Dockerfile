@@ -54,6 +54,7 @@ RUN apt-get update && apt-get upgrade -y \
 WORKDIR /code
 
 COPY ./poetry.lock ./pyproject.toml /code/
+COPY ./pytest.ini /code/
 COPY ./manage.py /code/
 COPY ./server /code/server
 COPY ./docker/django/entrypoint.sh docker-entrypoint.sh

@@ -4,7 +4,7 @@ from server.apps.core.mixins import DateTimeMixin, UUIDMixin
 from server.apps.users.models import User
 
 
-class Notification(UUIDMixin, DateTimeMixin, models.Model):
+class Notification(DateTimeMixin, models.Model):
     """Уведомления для пользователей"""
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications',
                              verbose_name='Пользователь',

@@ -30,6 +30,18 @@ services:
       - django-media:/var/www/django/media
     command: bash gunicorn.sh
 
+
+  db:
+    image: "postgres:latest"
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - webnet
+    ports:
+      - "5432:5432"
+    env_file: ./config/.env
+
   redis:
     container_name: redis
     image: redis

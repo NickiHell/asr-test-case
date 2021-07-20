@@ -1,11 +1,3 @@
-"""
-This module is used to provide configuration, fixtures, and plugins for pytest.
-
-It may be also used for extending doctest's context:
-1. https://docs.python.org/3/library/doctest.html
-2. https://docs.pytest.org/en/latest/doctest.html
-"""
-
 import pytest
 
 
@@ -43,3 +35,8 @@ def _debug(settings) -> None:
 def main_heading() -> str:
     """An example fixture containing some html fragment."""
     return '<h1>wemake-django-template</h1>'
+
+
+@pytest.fixture(autouse=True)
+def enable_db_access(db):
+    pass
