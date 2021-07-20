@@ -10,6 +10,7 @@ cd /code
 
 python manage.py migrate --noinput
 python manage.py collectstatic --noinput
+pytest tests
 
 /usr/local/bin/gunicorn server.asgi:application -k uvicorn.workers.UvicornWorker \
   --workers=4 \

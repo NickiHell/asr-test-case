@@ -21,7 +21,7 @@ class NotificationSendView(View):
         users: QuerySet[User] = User.objects.all()
         form = NotificationForm(request.POST)
         if form.is_valid() and request.user.is_staff:
-            notifications: Tuple[Notification] = tuple(
+            notifications: Tuple[Notification, ...] = tuple(
                 Notification(
                     user=x,
                     message=form.data['message']

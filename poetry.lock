@@ -699,6 +699,23 @@ python-dateutil = ">=2.4"
 text-unidecode = "1.3"
 
 [[package]]
+name = "fakeredis"
+version = "1.5.2"
+description = "Fake implementation of redis API for testing purposes."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+redis = "<3.6.0"
+six = ">=1.12"
+sortedcontainers = "*"
+
+[package.extras]
+aioredis = ["aioredis (<2)"]
+lua = ["lupa"]
+
+[[package]]
 name = "flake8"
 version = "3.9.2"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -1290,6 +1307,14 @@ lint = ["pylint"]
 doc = ["sphinx", "sphinx-rtd-theme", "sphobjinv"]
 
 [[package]]
+name = "notification"
+version = "0.2.1"
+description = "email templating and sending library (supports html and text emails) with wsgi support"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "nplusone"
 version = "1.0.0"
 description = "Detecting the n+1 queries problem in Python"
@@ -1581,6 +1606,20 @@ docs = ["sphinx", "sphinx-rtd-theme"]
 testing = ["django", "django-configurations (>=2.0)"]
 
 [[package]]
+name = "pytest-mock"
+version = "3.6.1"
+description = "Thin-wrapper around the mock package for easier use with pytest"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+pytest = ">=5.0"
+
+[package.extras]
+dev = ["pre-commit", "tox", "pytest-asyncio"]
+
+[[package]]
 name = "pytest-randomly"
 version = "3.8.0"
 description = "Pytest plugin to randomly order tests and control random.seed."
@@ -1591,6 +1630,30 @@ python-versions = ">=3.6"
 [package.dependencies]
 importlib-metadata = {version = ">=3.6.0", markers = "python_version < \"3.10\""}
 pytest = "*"
+
+[[package]]
+name = "pytest-socket"
+version = "0.4.0"
+description = "Pytest Plugin to disable socket calls during tests"
+category = "dev"
+optional = false
+python-versions = ">=3.6,<4.0"
+
+[package.dependencies]
+pytest = ">=3.6.3"
+
+[[package]]
+name = "pytest-sugar"
+version = "0.9.4"
+description = "pytest-sugar is a plugin for pytest that changes the default look and feel of pytest (e.g. progressbar, show tests that fail instantly)."
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+packaging = ">=14.1"
+pytest = ">=2.9"
+termcolor = ">=1.1.0"
 
 [[package]]
 name = "pytest-testmon"
@@ -1784,7 +1847,7 @@ python-versions = "*"
 name = "sortedcontainers"
 version = "2.4.0"
 description = "Sorted Containers -- Sorted List, Sorted Dict, Sorted Set"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -1936,6 +1999,14 @@ python-versions = ">=3.6"
 dev = ["coverage", "freezegun (>=0.2.8)", "pretend", "pytest-asyncio", "pytest-randomly", "pytest (>=6.0)", "simplejson", "furo", "sphinx", "sphinx-toolbox", "twisted", "pre-commit"]
 docs = ["furo", "sphinx", "sphinx-toolbox", "twisted"]
 tests = ["coverage", "freezegun (>=0.2.8)", "pretend", "pytest-asyncio", "pytest-randomly", "pytest (>=6.0)", "simplejson"]
+
+[[package]]
+name = "termcolor"
+version = "1.1.0"
+description = "ANSII Color formatting for output in terminal."
+category = "dev"
+optional = false
+python-versions = "*"
 
 [[package]]
 name = "testfixtures"
@@ -2108,7 +2179,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "388b1c9b6b1bffc01637e453ece72e7d37f0837ef1a14ddf98abe2b9142ea1d3"
+content-hash = "9a670c4d5bad918dce5e56bd6654da6a4f8bcd40934a219da75403d043b89e62"
 
 [metadata.files]
 alabaster = [
@@ -2442,6 +2513,10 @@ faker = [
     {file = "Faker-8.10.1-py3-none-any.whl", hash = "sha256:9ac6b39b9618f55be6b8b45089e624564469a035cc845c69ce990332ce3663f4"},
     {file = "Faker-8.10.1.tar.gz", hash = "sha256:a665e6e2e9087ec9ad4ebcd2f09acd031b44193ee93401817001b6557c6502b4"},
 ]
+fakeredis = [
+    {file = "fakeredis-1.5.2-py3-none-any.whl", hash = "sha256:f1ffdb134538e6d7c909ddfb4fc5edeb4a73d0ea07245bc69b8135fbc4144b04"},
+    {file = "fakeredis-1.5.2.tar.gz", hash = "sha256:18fc1808d2ce72169d3f11acdb524a00ef96bd29970c6d34cfeb2edb3fc0c020"},
+]
 flake8 = [
     {file = "flake8-3.9.2-py2.py3-none-any.whl", hash = "sha256:bf8fd333346d844f616e8d47905ef3a3384edae6b4e9beb0c5101e25e3110907"},
     {file = "flake8-3.9.2.tar.gz", hash = "sha256:07528381786f2a6237b061f6e96610a4167b226cb926e2aa2b6b1d78057c576b"},
@@ -2672,6 +2747,10 @@ nitpick = [
     {file = "nitpick-0.26.0-py3-none-any.whl", hash = "sha256:f5cfcd68f83910ce8a4cd998804a4e15dfd5a9a54a3cb4e201f1ec4bee67fe89"},
     {file = "nitpick-0.26.0.tar.gz", hash = "sha256:b11009c77975990d7776ea6d307ed4272f5122e83b2fc16a6bad557222b6d809"},
 ]
+notification = [
+    {file = "notification-0.2.1-py2.6.egg", hash = "sha256:af6d5f91635e16d683490f11e2d9e7cf1dcfa06e9d58dbb6276194d89ad44ff4"},
+    {file = "notification-0.2.1.tar.gz", hash = "sha256:2089c719ea22c12c8742b28214e1bd2eda9c45b8aa37df6128d8c91392ec680a"},
+]
 nplusone = [
     {file = "nplusone-1.0.0-py2.py3-none-any.whl", hash = "sha256:96b1e6e29e6af3e71b67d0cc012a5ec8c97c6a2f5399f4ba41a2bbe0e253a9ac"},
     {file = "nplusone-1.0.0.tar.gz", hash = "sha256:1726c0a10c0aa7eabb04e24db2882ff97b6b7ee29d729a8d97dcbd12ef5a5651"},
@@ -2806,9 +2885,20 @@ pytest-django = [
     {file = "pytest-django-4.4.0.tar.gz", hash = "sha256:b5171e3798bf7e3fc5ea7072fe87324db67a4dd9f1192b037fed4cc3c1b7f455"},
     {file = "pytest_django-4.4.0-py3-none-any.whl", hash = "sha256:65783e78382456528bd9d79a35843adde9e6a47347b20464eb2c885cb0f1f606"},
 ]
+pytest-mock = [
+    {file = "pytest-mock-3.6.1.tar.gz", hash = "sha256:40217a058c52a63f1042f0784f62009e976ba824c418cced42e88d5f40ab0e62"},
+    {file = "pytest_mock-3.6.1-py3-none-any.whl", hash = "sha256:30c2f2cc9759e76eee674b81ea28c9f0b94f8f0445a1b87762cadf774f0df7e3"},
+]
 pytest-randomly = [
     {file = "pytest-randomly-3.8.0.tar.gz", hash = "sha256:d9e21a72446757129378beea00bc9a32df1fb1cfd0bbe408be1ae9685bdf1209"},
     {file = "pytest_randomly-3.8.0-py3-none-any.whl", hash = "sha256:f5b7a09e84ee1eabcdedbb73c51d0929ae2f582bab6941dbb513bb49296d6340"},
+]
+pytest-socket = [
+    {file = "pytest-socket-0.4.0.tar.gz", hash = "sha256:f590593675161e1407df676f0aff9ae24ca52c19f0fb4f30df0aaf820fa32bb1"},
+    {file = "pytest_socket-0.4.0-py3-none-any.whl", hash = "sha256:5e21faa48f1febc6ac83bf78f5dd48a8989ef84a01ae50deb3a226813e5f61d1"},
+]
+pytest-sugar = [
+    {file = "pytest-sugar-0.9.4.tar.gz", hash = "sha256:b1b2186b0a72aada6859bea2a5764145e3aaa2c1cfbb23c3a19b5f7b697563d3"},
 ]
 pytest-testmon = [
     {file = "pytest-testmon-1.1.1.tar.gz", hash = "sha256:c8810f991545e352f646fb382e5962ff54b8aa52b09d62d35ae04f0d7a9c58d9"},
@@ -2968,6 +3058,9 @@ stevedore = [
 structlog = [
     {file = "structlog-21.1.0-py2.py3-none-any.whl", hash = "sha256:62f06fc0ee32fb8580f0715eea66cb87271eb7efb0eaf9af6b639cba8981de47"},
     {file = "structlog-21.1.0.tar.gz", hash = "sha256:d9d2d890532e8db83c6977a2a676fb1889922ff0c26ad4dc0ecac26f9fafbc57"},
+]
+termcolor = [
+    {file = "termcolor-1.1.0.tar.gz", hash = "sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"},
 ]
 testfixtures = [
     {file = "testfixtures-6.18.0-py2.py3-none-any.whl", hash = "sha256:9bddf79b2dddb36420a20c25a65c827a8e7398c6ed4e2c75c2697857cb006be9"},

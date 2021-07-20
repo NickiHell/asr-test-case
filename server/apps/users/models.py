@@ -7,7 +7,7 @@ from server.apps.core.mixins import DateTimeMixin, UUIDMixin
 faker = Faker()
 
 
-class User(UUIDMixin, DateTimeMixin, AbstractUser):
+class User(DateTimeMixin, AbstractUser):
     """Пользователь"""
     user_timedelta = models.DurationField('Timedelta пользователя на уведомления', null=True)
     email = models.EmailField('Email', default=faker.email())

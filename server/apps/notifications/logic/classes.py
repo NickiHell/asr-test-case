@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import Tuple
+from typing import Tuple, Union, Type
 
-from django.db.models import QuerySet, F
+from django.db.models import F, QuerySet, Q
 from django.db.models.fields import DateTimeField
 from django.db.models.functions import Cast
 from django.utils import timezone
@@ -27,7 +27,7 @@ class AbstractNotificationUseCase(ABC):
         pass
 
     @abstractmethod
-    def invoke_service(self, service: AbstractNotificationService):
+    def invoke_service(self, service, data):
         pass
 
     def __call__(self, *args, **kwargs):
@@ -38,27 +38,27 @@ class BaseNotificationUseCase(AbstractNotificationUseCase):
     """Базовый класс для отправки уведомлений пользователям"""
     PushService = PushNotificationService
     EmailService = EmailNotificationService
-    UsersForPush = None
-    UsersForEmail = None
+    UsersForPush: Union[QuerySet[User], None] = None
+    UsersForEmail: Union[QuerySet[User], None] = None
 
     def execute(self):
         self.UsersForPush, self.UsersForEmail = self._get_querysets()
         self.invoke_service(self.PushService, self.UsersForPush)
-        self.invoke_service(self.EmailService, self.UsersForPush)
         self.invoke_service(self.EmailService, self.UsersForEmail)
 
-    def invoke_service(self, service: AbstractNotificationService, data: QuerySet[User]):
+    def invoke_service(self,
+                       service: Type[Union[PushNotificationService, EmailNotificationService]],
+                       data: QuerySet[User]):
         notifications = self._notifications.filter(user_id__in=data)
         for notification in notifications:
             service.invoke(notification, None)
 
-    def _get_querysets(self) -> Tuple[QuerySet, QuerySet]:
+    def _get_querysets(self) -> Tuple[QuerySet[User], QuerySet[User]]:
         now = timezone.now()
         users_for_push = self._users.annotate(
-            dt=Cast(now + F('user_timedelta'), output_field=DateTimeField())
+            usertime=Cast(now + F('user_timedelta'), output_field=DateTimeField())
         ).filter(
-            dt__range=(now.replace(hour=10, minute=0), now.replace(hour=21, minute=59))
+            Q(usertime__hour__range=[now.replace(hour=10).hour, now.replace(hour=21).hour]),
         )
 
-        users_for_email = self._users.exclude(id__in=users_for_push)
-        return users_for_push, users_for_email
+        return users_for_push, self._users
