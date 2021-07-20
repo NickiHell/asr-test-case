@@ -57,6 +57,7 @@ COPY ./poetry.lock ./pyproject.toml /code/
 COPY ./pytest.ini /code/
 COPY ./manage.py /code/
 COPY ./server /code/server
+COPY ./tests /code/tests
 COPY ./docker/django/entrypoint.sh docker-entrypoint.sh
 COPY ./docker/django/gunicorn.sh gunicorn.sh
 
