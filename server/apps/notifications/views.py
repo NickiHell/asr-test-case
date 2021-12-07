@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import Tuple
 
 from django.db.models import QuerySet
 from django.http import HttpResponse

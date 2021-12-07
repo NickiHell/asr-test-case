@@ -9,7 +9,6 @@ CACHES = {
     },
 }
 
-
 # django-axes
 # https://django-axes.readthedocs.io/en/latest/4_configuration.html#configuring-caches
 

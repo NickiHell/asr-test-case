@@ -1,10 +1,8 @@
-import os
 import fakeredis
 import redis
 
-from server.settings.environments.development import *
-
 from server.settings.components import BASE_DIR
+from server.settings.environments.development import *
 
 STATIC_URL = '/static/'
 
@@ -25,6 +23,5 @@ CSRF_COOKIE_SECURE = False
 CSRF_USE_SESSIONS = False
 
 CELERY_TASK_ALWAYS_EAGER = True
-
 
 AUTH_USER_MODEL = 'users.User'

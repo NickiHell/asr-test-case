@@ -20,7 +20,6 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
-
 # Staticfiles
 # https://docs.djangoproject.com/en/2.2/ref/contrib/staticfiles/
 
@@ -38,12 +37,10 @@ STATICFILES_STORAGE = (
     'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 )
 
-
 # Media files
 # https://docs.djangoproject.com/en/2.2/topics/files/
 
 MEDIA_ROOT = '/var/www/django/media'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -55,7 +52,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': '{0}.CommonPasswordValidator'.format(_PASS)},
     {'NAME': '{0}.NumericPasswordValidator'.format(_PASS)},
 ]
-
 
 # Security
 # https://docs.djangoproject.com/en/2.2/topics/security/

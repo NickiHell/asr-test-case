@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Union
 
-from django.db.models import QuerySet
-
 from server.apps.notifications.models import Notification
 from server.apps.users.models import User
 

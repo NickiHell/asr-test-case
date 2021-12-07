@@ -7,7 +7,6 @@ from django.db.models.functions import Cast
 from django.utils import timezone
 
 from server.apps.notifications.logic.services import (
-    AbstractNotificationService,
     EmailNotificationService,
     PushNotificationService,
 )

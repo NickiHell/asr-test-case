@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from faker import Faker
 
-from server.apps.core.mixins import DateTimeMixin, UUIDMixin
+from server.apps.core.mixins import DateTimeMixin
 
 faker = Faker()
 

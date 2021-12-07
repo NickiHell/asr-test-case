@@ -5,10 +5,9 @@ SECURITY WARNING: don't run with debug turned on in production!
 """
 
 import logging
-import os
 from typing import List
 
-from server.settings.components import BASE_DIR, config
+from server.settings.components import config
 from server.settings.components.common import (
     DATABASES,
     INSTALLED_APPS,
